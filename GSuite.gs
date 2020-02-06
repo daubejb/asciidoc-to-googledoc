@@ -44,7 +44,7 @@ var g = {
       doc.getBody().appendListItem(text);
     },
     insertParagraph: function (text, doc) {
-      var boldPositions = getBoldPositions(text);
+      var boldPositions = helper.getBoldPositions(text);
       var p = doc.getBody().appendParagraph(text);
       p.setHeading(DocumentApp.ParagraphHeading.NORMAL);
       if (boldPositions.length > 0) {
