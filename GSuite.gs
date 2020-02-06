@@ -53,7 +53,16 @@ var g = {
       }
     },
     createBaseTemplatedDocument: function (title) {
-      return DocumentApp.create(title);
+      var doc = DocumentApp.create(title);
+      doc.addHeader().appendImage(App.globals.images.titlePageHeaderBlob)
+      .setHeight(50)
+      .setWidth(50)
+      .getParent()
+      .asParagraph()
+      .setAlignment(DocumentApp.HorizontalAlignment.CENTER);
+      return doc;
     }
   }
 }
+
+//
