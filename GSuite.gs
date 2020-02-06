@@ -51,6 +51,9 @@ var g = {
         Logger.log(p.editAsText());
         p.editAsText().setBold(boldPositions[0], boldPositions[1], true)
       }
+    },
+    createBaseTemplatedDocument: function (title) {
+      return DocumentApp.create(title);
     }
   }
 }
