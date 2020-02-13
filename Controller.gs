@@ -31,6 +31,8 @@ var control = {
         return 'newline';
       case '==':
         return 'h1';
+      case '===':
+        return 'h2';
       case '*':
         return 'ol';
       default:
@@ -44,6 +46,7 @@ var control = {
     };
     if (part.type !== '=' &&
         part.type !== '==' &&
+        part.type !== '===' &&
         part.type !== ' ' &&
         part.type !== '*') {
       part.type = 'p';

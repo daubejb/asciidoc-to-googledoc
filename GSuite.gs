@@ -17,6 +17,9 @@ var g = {
         case 'h1':
           g.docs.insertH1(part.text, doc);
           break;
+        case 'h2':
+          g.docs.insertH2(part.text, doc);
+          break;
         case 'ol':
           g.docs.insertOl(part.text, doc);
           break;
@@ -38,7 +41,11 @@ var g = {
       var h1 = doc.getBody().appendParagraph(text);
       h1.setHeading(DocumentApp.ParagraphHeading.HEADING1);
       h1.setAlignment(DocumentApp.HorizontalAlignment.LEFT);
-      
+    },
+    insertH2: function (text, doc) {
+      var h2 = doc.getBody().appendParagraph(text);
+      h2.setHeading(DocumentApp.ParagraphHeading.HEADING2);
+      h2.setAlignment(DocumentApp.HorizontalAlignment.LEFT);
     },
     insertOl: function (text, doc) {
       doc.getBody().appendListItem(text);
