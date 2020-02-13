@@ -10,4 +10,4 @@ A Google Apps Script project to import an AsciiDoc into Google Docs
 4. === (header 2)
 5. * (ordered lists is * syntax)
 6. link:http - hyperlink with no display as text
-7. *text* - (bold text is halfway working)
+7. \*text\* - (bold text is halfway working)
