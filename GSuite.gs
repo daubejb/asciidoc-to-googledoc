@@ -52,11 +52,25 @@ var g = {
     },
     insertParagraph: function (text, doc) {
       var boldPositions = helper.getBoldPositions(text);
+      var linkPositions = helper.getLinkPositions(text);
+      Logger.log(linkPositions);
       var p = doc.getBody().appendParagraph(text);
       p.setHeading(DocumentApp.ParagraphHeading.NORMAL);
       if (boldPositions.length > 0) {
         Logger.log(p.editAsText());
         p.editAsText().setBold(boldPositions[0], boldPositions[1], true)
+      }
+      if (linkPositions.length > 1) {
+        var regExp = new RegExp(/link:http:.*\[\]/);
+        var testText = p.editAsText().getText();
+        var testText2 = regExp.exec(testText)[0];
+        var replacement = testText2.slice(5,-2);
+        var textToFind = testText2.toString();
+        p.replaceText("link:http:.*\\[\\]", replacement)
+        var link = p.findText(replacement)
+        var start = link.getStartOffset();
+        var text = link.getElement().asText();
+        text.setLinkUrl(start, start + replacement.length, replacement);
       }
     },
     createBaseTemplatedDocument: function (title) {
@@ -72,4 +86,9 @@ var g = {
   }
 }
 
-//
+//  if(element){ // if found a match
+//    var start = element.getStartOffset();
+//    var text = element.getElement().asText();
+//    text.replaceText("<<urlGoesHere>>",url);
+//    text.setLinkUrl(start, start+url.length, url);
+//    doc.saveAndClose();
