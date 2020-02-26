@@ -59,6 +59,7 @@ var g = {
       if (boldPositions.length > 0) {
         Logger.log(p.editAsText());
         p.editAsText().setBold(boldPositions[0], boldPositions[1], true)
+        p.replaceText("*", "");
       }
       if (linkPositions.length > 1) {
         var regExp = new RegExp(/link:http:.*\[\]/);
