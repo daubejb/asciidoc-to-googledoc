@@ -2,8 +2,8 @@ var g = {
   docs: {
     replaceVariables: function(variables, doc) {
       doc.getBody().editAsText()
-      .replaceText('{customer}', variables.customer)
-      .replaceText('{docyear}', variables.docyear);
+      .replaceText('{customer}', variables.customer) // TODO - ERROR TRAPPING IF variables.customer is undefined
+      .replaceText('{docyear}', variables.docyear);  // TODO - ERROR TRAPPING IF variables.customer is undefined
     },
     insertGPartsIntoDocument: function (gParts, doc) {
       for (var i = 0, len = gParts.length; i < len; i++) {
@@ -28,6 +28,8 @@ var g = {
         case 'ol':
           g.docs.insertOl(part.text, doc);
           break;
+        case 'pagebreak':
+          g.docs.insertPageBreak(doc);
         default:
           g.docs.insertParagraph(part.text, doc);
           break;      
@@ -61,7 +63,7 @@ var g = {
       Logger.log(linkPositions);
       var p = doc.getBody().appendParagraph(text);
       p.setHeading(DocumentApp.ParagraphHeading.NORMAL);
-      if (boldPositions.length > 0) {
+      if (boldPositions.length > 1) {
         Logger.log(p.editAsText());
         p.editAsText().setBold(boldPositions[0], boldPositions[1], true)
         p.replaceText("*", "");
@@ -78,6 +80,9 @@ var g = {
         var text = link.getElement().asText();
         text.setLinkUrl(start, start + replacement.length, replacement);
       }
+    },
+    insertPageBreak: function (doc) {
+      doc.getBody().appendPageBreak();
     },
     createBaseTemplatedDocument: function (title) {
       var doc = DocumentApp.create(title);

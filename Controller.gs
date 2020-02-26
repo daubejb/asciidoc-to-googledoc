@@ -62,22 +62,33 @@ var control = {
         return 'h2';
       case '*':
         return 'ol';
+      case '<<<':
+        return 'pagebreak';
       default:
         return 'p';
     }
   },
   getParts: function (element) {
-    var part = {
+    var part
+    
+    if (element.substr(0,3) == '<<<') {
+      part = {
+        type: '<<<',
+        text: ''
+      }
+    } else {
+      part = {
         type: element.substr(0,element.indexOf(' ')),
         text: element.substr(element.indexOf(' ')+1)
       };
-    if (part.type !== '=' &&
-        part.type !== '==' &&
-        part.type !== '===' &&
-        part.type !== ' ' &&
-        part.type !== '*') {
-      part.type = 'p';
-      part.text = element;
+      if (part.type !== '=' &&
+          part.type !== '==' &&
+          part.type !== '===' &&
+          part.type !== ' ' &&
+          part.type !== '*') {
+        part.type = 'p';
+        part.text = element;
+      }
     }
     return part;
   }

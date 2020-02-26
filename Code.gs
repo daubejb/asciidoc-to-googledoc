@@ -2,7 +2,7 @@ function convertAsciiToGoogle() {
   var myDocument = DriveApp.getFilesByName('preface.adoc').next().getBlob().getDataAsString();
   // collapse includes into mega doc
   var lines = myDocument.split("\n");
-  var compound = control.extractVariables(lines); //JEFF YOU WERE HERE TRYING TO FIGURE OUT COMMENTS AND VARIABLES
+  var compound = control.extractVariables(lines);
   var variables = compound.variables;
   Logger.log('variables: ' + variables);
   var linesNoVariables = compound.lines
