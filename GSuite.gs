@@ -1,5 +1,10 @@
 var g = {
   docs: {
+    replaceVariables: function(variables, doc) {
+      doc.getBody().editAsText()
+      .replaceText('{customer}', variables.customer)
+      .replaceText('{docyear}', variables.docyear);
+    },
     insertGPartsIntoDocument: function (gParts, doc) {
       for (var i = 0, len = gParts.length; i < len; i++) {
         var part = gParts[i];

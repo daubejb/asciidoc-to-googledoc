@@ -17,4 +17,5 @@ function convertAsciiToGoogle() {
   Logger.log('title: ' + title)
   var doc = g.docs.createBaseTemplatedDocument(title);
   g.docs.insertGPartsIntoDocument(gParts, doc);
+  g.docs.replaceVariables(variables, doc);
 }
